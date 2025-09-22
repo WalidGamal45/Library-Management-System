@@ -5,7 +5,8 @@ The project demonstrates database design, RESTful API implementation, and role-b
 
 ---
 📌 ERD Diagram:
-![ERD Diagram](Docs/Digram81.png)
+![ERD Diagram](Docs/ERD.png)
+
 
 
 ## 🚀 Features
