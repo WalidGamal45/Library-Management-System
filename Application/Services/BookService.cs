@@ -88,4 +88,25 @@ public class BookService : IBookService
         await _context.SaveChangesAsync();
         return true;
     }
+    public async Task<IEnumerable<Book>> SearchBooks(string? title, string? author, string? category)
+    {
+        var query = _context.Books
+            .Include(b => b.Publisher)
+            .Include(b => b.BookAuthors).ThenInclude(ba => ba.Author)
+            .Include(b => b.BookCategories).ThenInclude(bc => bc.Category)
+            .AsQueryable();
+
+        if (!string.IsNullOrEmpty(title))
+            query = query.Where(b => b.Title.Contains(title));
+
+        if (!string.IsNullOrEmpty(author))
+            query = query.Where(b => b.BookAuthors.Any(ba => ba.Author.Name.Contains(author)));
+
+        if (!string.IsNullOrEmpty(category))
+            query = query.Where(b => b.BookCategories.Any(bc => bc.Category.Name.Contains(category)));
+
+        return await query.ToListAsync();
+    }
+
+
 }
