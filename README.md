@@ -11,7 +11,7 @@ The project demonstrates database design, RESTful API implementation, and role-b
 - **Users with Roles (Admin, Librarian, Staff)**
 
 📌 ERD Diagram:
-![ERD Diagram](Docs/Digram%2081.png)
+![ERD Diagram](Docs/ERD.png)
 
 
 
