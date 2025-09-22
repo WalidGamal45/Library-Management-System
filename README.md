@@ -4,6 +4,9 @@ A Library Management System built with **.NET 8 Web API** and **Entity Framework
 The project demonstrates database design, RESTful API implementation, and role-based access control for managing books, members, and borrowing transactions.  
 
 ---
+📌 ERD Diagram:
+![ERD Diagram](Docs/Digram81.png)
+
 
 ## 🚀 Features
 
