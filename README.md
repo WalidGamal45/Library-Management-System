@@ -5,7 +5,7 @@
 
 The system supports books, members, borrowing transactions, and role-based access control.
 
-![ERD](./docs/ERD.png)
+![ERD](./Docs/ERD.png)
 
 ### Key Entities
 - **Books**: Metadata such as title, authors, publishers, categories, ISBN, edition, summary, cover image, and status (`In`/`Out`).
