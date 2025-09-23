@@ -30,7 +30,8 @@ public class BorrowTransactionsController : ControllerBase
     }
 
     [HttpPost("borrow")]
-    [Authorize(Roles = "Administrator,Librarian,Staff")]
+    [Authorize]
+   // [Authorize(Roles = "Administrator,Librarian,Staff")]
     public async Task<IActionResult> BorrowBook(int bookId, int memberId)
     {
         var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
@@ -41,7 +42,8 @@ public class BorrowTransactionsController : ControllerBase
     }
 
     [HttpPost("return/{id}")]
-    [Authorize(Roles = "Administrator,Librarian,Staff")]
+    [Authorize]
+    // [Authorize(Roles = "Administrator,Librarian,Staff")]
     public async Task<IActionResult> ReturnBook(int id)
     {
         var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);

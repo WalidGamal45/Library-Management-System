@@ -23,7 +23,9 @@ public class BookService : IBookService
                 ISBN = b.ISBN,
                 PublisherName = b.Publisher.Name,
                 Status = b.Status,
-                CopiesAvailable = b.CopiesAvailable
+                CopiesAvailable = b.CopiesAvailable,
+               
+
             })
             .ToListAsync();
     }
@@ -49,19 +51,32 @@ public class BookService : IBookService
 
     public async Task<BookDto> CreateAsync(BookDto bookDto)
     {
-        var book = new Book
+        try
         {
-            Title = bookDto.Title,
-            ISBN = bookDto.ISBN,
-            Status = bookDto.Status,
-            CopiesAvailable = bookDto.CopiesAvailable
-        };
+            var book = new Book
+            {
+                Title = bookDto.Title,
+                ISBN = bookDto.ISBN,
+                Status = bookDto.Status,
+                CopiesAvailable = bookDto.CopiesAvailable,
+                Description= bookDto.Description,
+                PublisherId = bookDto.PublisherId
 
-        _context.Books.Add(book);
-        await _context.SaveChangesAsync();
+            };
+            _context.Books.Add(book);
+            await _context.SaveChangesAsync();
 
-        bookDto.Id = book.Id;
-        return bookDto;
+            bookDto.Id = book.Id;
+            return bookDto;
+
+        }
+        catch(Exception ex)
+        {
+            throw ex;
+        }
+
+
+       
     }
 
     public async Task<BookDto> UpdateAsync(int id, BookDto bookDto)
@@ -73,6 +88,8 @@ public class BookService : IBookService
         book.ISBN = bookDto.ISBN;
         book.Status = bookDto.Status;
         book.CopiesAvailable = bookDto.CopiesAvailable;
+        book.Description = bookDto.Description;
+        book.PublisherId = bookDto.PublisherId;
 
         await _context.SaveChangesAsync();
         bookDto.Id = book.Id;

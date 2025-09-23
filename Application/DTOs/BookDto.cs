@@ -8,6 +8,8 @@
         public string PublisherName { get; set; }
         public BookStatus Status { get; set; }
         public int CopiesAvailable { get; set; }
+        public string Description { get; set; }
+        public int PublisherId { get; set; }
     }
 
 }

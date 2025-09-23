@@ -29,7 +29,8 @@ public class MembersController : ControllerBase
     }
 
     [HttpPost]
-    [Authorize(Roles = "Administrator,Librarian")]
+    [Authorize]
+  //  [Authorize(Roles = "Administrator,Librarian")]
     public async Task<IActionResult> CreateMember([FromBody] MemberDto member)
     {
         var createdMember = await _memberService.CreateAsync(member);
@@ -37,7 +38,8 @@ public class MembersController : ControllerBase
     }
 
     [HttpPut("{id}")]
-    [Authorize(Roles = "Administrator,Librarian")]
+    [Authorize]
+    //[Authorize(Roles = "Administrator,Librarian")]
     public async Task<IActionResult> UpdateMember(int id, [FromBody] MemberDto member)
     {
         var updatedMember = await _memberService.UpdateAsync(id, member);
@@ -46,7 +48,8 @@ public class MembersController : ControllerBase
     }
 
     [HttpDelete("{id}")]
-    [Authorize(Roles = "Administrator")]
+    [Authorize]
+    // [Authorize(Roles = "Administrator")]
     public async Task<IActionResult> DeleteMember(int id)
     {
         var deleted = await _memberService.DeleteAsync(id);

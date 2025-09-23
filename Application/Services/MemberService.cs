@@ -41,19 +41,27 @@ public class MemberService : IMemberService
 
     public async Task<MemberDto> CreateAsync(MemberDto memberDto)
     {
-        var member = new Member
+        try
         {
-            FullName = memberDto.FullName,
-            Email = memberDto.Email,
-            Phone = memberDto.Phone,
-            JoinedAt = memberDto.JoinedAt
-        };
+            var member = new Member
+            {
+                FullName = memberDto.FullName,
+                Email = memberDto.Email,
+                Phone = memberDto.Phone,
+                JoinedAt = memberDto.JoinedAt
+            };
 
-        _context.Members.Add(member);
-        await _context.SaveChangesAsync();
+            _context.Members.Add(member);
+            await _context.SaveChangesAsync();
 
-        memberDto.Id = member.Id;
-        return memberDto;
+            memberDto.Id = member.Id;
+            return memberDto;
+        }
+        catch (Exception ex)
+        {
+            throw ex;
+        }
+       
     }
 
     public async Task<MemberDto> UpdateAsync(int id, MemberDto memberDto)

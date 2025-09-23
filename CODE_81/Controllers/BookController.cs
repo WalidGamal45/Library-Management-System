@@ -38,7 +38,8 @@ public class BooksController : ControllerBase
     }
 
     [HttpPost]
-    [Authorize(Roles = "Administrator,Librarian")]
+    [Authorize]
+ //   [Authorize(Roles = "Administrator,Librarian")]
     public async Task<IActionResult> CreateBook([FromBody] BookDto book)
     {
         var createdBook = await _bookService.CreateAsync(book);
@@ -46,7 +47,8 @@ public class BooksController : ControllerBase
     }
 
     [HttpPut("{id}")]
-    [Authorize(Roles = "Administrator,Librarian")]
+    [Authorize]
+    // [Authorize(Roles = "Administrator,Librarian")]
     public async Task<IActionResult> UpdateBook(int id, [FromBody] BookDto book)
     {
         var updatedBook = await _bookService.UpdateAsync(id, book);
@@ -55,7 +57,8 @@ public class BooksController : ControllerBase
     }
 
     [HttpDelete("{id}")]
-    [Authorize(Roles = "Administrator")]
+    [Authorize]
+    //[Authorize(Roles = "Administrator")]
     public async Task<IActionResult> DeleteBook(int id)
     {
         var deleted = await _bookService.DeleteAsync(id);
