@@ -8,7 +8,7 @@ The system supports books, members, borrowing transactions, and role-based acces
 ![ERD](https://i.suar.me/npOlM/l)
 
 
-[Download Postman Collection](Docs/Library%20Management%20System%20API.postman_collection)
+[Download Postman Collection]([Docs/Library%20Management%20System%20API.postman_collection](https://drive.google.com/file/d/1l2Er_w7ML35C8VFVp8A_OiszZq45uXWY/view?usp=drive_link))
 
 ### Key Entities
 - **Books**: Metadata such as title, authors, publishers, categories, ISBN, edition, summary, cover image, and status (`In`/`Out`).
