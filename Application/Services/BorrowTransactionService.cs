@@ -51,23 +51,24 @@ public class BorrowTransactionService : IBorrowTransactionService
         };
     }
 
-    public async Task<BorrowTransactionDto> BorrowBookAsync(int bookId, int memberId, string userId)
+    public async Task<BorrowTransactionDto> BorrowBookAsync(BorrowBookDto request, string userId)
     {
-        var book = await _context.Books.FindAsync(bookId);
+        var book = await _context.Books.FindAsync(request.bookId);
         if (book == null || book.CopiesAvailable <= 0) return null;
 
-        var member = await _context.Members.FindAsync(memberId);
+        var member = await _context.Members.FindAsync(request.memberId);
         if (member == null) return null;
 
         book.CopiesAvailable -= 1;
 
         var transaction = new BorrowTransaction
         {
-            BookId = bookId,
-            MemberId = memberId,
+            BookId = request.bookId,
+            MemberId = request.memberId,
             BorrowDate = DateTime.UtcNow,
             DueDate = DateTime.UtcNow.AddDays(14), // مثال: الاستعارة لمدة أسبوعين
-            CreatedByUserId = userId
+            CreatedByUserId = userId,
+            ProcessedByUserId=userId
         };
 
         _context.BorrowTransactions.Add(transaction);
@@ -76,9 +77,9 @@ public class BorrowTransactionService : IBorrowTransactionService
         return new BorrowTransactionDto
         {
             Id = transaction.Id,
-            BookId = bookId,
+            BookId = request.bookId,
             BookTitle = book.Title,
-            MemberId = memberId,
+            MemberId = request.memberId,
             MemberName = member.FullName,
             BorrowDate = transaction.BorrowDate,
             DueDate = transaction.DueDate,
@@ -88,22 +89,26 @@ public class BorrowTransactionService : IBorrowTransactionService
 
     public async Task<BorrowTransactionDto> ReturnBookAsync(int transactionId, string userId)
     {
-        var transaction = await _context.BorrowTransactions
-            .Include(bt => bt.Book)
-            .Include(bt => bt.Member)
+        try
+        {
+
+
+            var transaction = await _context.BorrowTransactions.Include
+                (x=>x.Book).Include(x=>x.Member)
+            
             .FirstOrDefaultAsync(bt => bt.Id == transactionId);
 
-        if (transaction == null || transaction.ReturnDate != null) return null;
+            if (transaction == null || transaction.ReturnDate != null) return null;
 
-        transaction.ReturnDate = DateTime.UtcNow;
-        transaction.ProcessedByUserId = userId;
+            transaction.ReturnDate = DateTime.UtcNow;
+            transaction.ProcessedByUserId = userId;
 
-        transaction.Book.CopiesAvailable += 1;
+            transaction.Book.CopiesAvailable += 1;
 
-        await _context.SaveChangesAsync();
+            await _context.SaveChangesAsync();
 
-        return new BorrowTransactionDto
-        {
+            return new BorrowTransactionDto
+            {
             Id = transaction.Id,
             BookId = transaction.BookId,
             BookTitle = transaction.Book.Title,
@@ -112,6 +117,13 @@ public class BorrowTransactionService : IBorrowTransactionService
             BorrowDate = transaction.BorrowDate,
             DueDate = transaction.DueDate,
             ReturnDate = transaction.ReturnDate
-        };
+            }
+            ;
+        }
+        catch (Exception ex)
+        {
+
+            throw;
+        }
     }
 }

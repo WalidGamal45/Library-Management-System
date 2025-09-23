@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using Application.DTOs;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
 
@@ -32,10 +33,10 @@ public class BorrowTransactionsController : ControllerBase
     [HttpPost("borrow")]
     [Authorize]
    // [Authorize(Roles = "Administrator,Librarian,Staff")]
-    public async Task<IActionResult> BorrowBook(int bookId, int memberId)
+    public async Task<IActionResult> BorrowBook(BorrowBookDto request)
     {
         var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
-        var transaction = await _borrowService.BorrowBookAsync(bookId, memberId, userId);
+        var transaction = await _borrowService.BorrowBookAsync(request, userId);
 
         if (transaction == null) return BadRequest("Book not available.");
         return Ok(transaction);
