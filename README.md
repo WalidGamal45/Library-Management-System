@@ -1,56 +1,104 @@
-# 📚 Library Management System
-
-A Library Management System built with **.NET 8 Web API** and **Entity Framework Core**.  
-The project demonstrates database design, RESTful API implementation, and role-based access control for managing books, members, and borrowing transactions.  
 
 ---
 
-## 🚀 Features
+## 📊 Database Schema
 
-- **Books Management**
-  - CRUD operations
-  - Extended metadata: multiple authors, categories, publisher, ISBN, edition, summary, status (Available/In/Out)
+The system supports books, members, borrowing transactions, and role-based access control.
 
-- **Members Management**
-  - CRUD for library members
+![ERD](./Docs/ERD.png)
 
-- **System Users**
-  - Roles: Administrator, Librarian, Staff
-  - Authentication & Authorization using JWT
-  - Secure password storage
-  - Activity logging
-
-- **Borrow & Return**
-  - Borrow transactions with status updates
-
-- **Search API**
-  - Search books by **Title, Author, Category**
-  - Filter books by **Status**
+### Key Entities
+- **Books**: Metadata such as title, authors, publishers, categories, ISBN, edition, summary, cover image, and status (`In`/`Out`).
+- **Members**: Borrowers who can check out books.
+- **System Users**: Staff, librarians, and administrators with role-based permissions.
+- **BorrowTransactions**: Tracks borrowing and returning of books.
+- **ActivityLogs**: Captures all user actions for auditing.
 
 ---
 
-## 🏗️ Architecture & Design
+## 🔑 Features
 
-- **Backend**: ASP.NET Core 8 (Web API)  
-- **ORM**: Entity Framework Core  
-- **Database**: SQL Server  
-- **Authentication**: Identity + JWT  
-- **Source Control**: Git / GitHub  
+- **Book Management**
+  - CRUD operations with support for multiple authors and categories.
+  - Search by title, author, or category.
+  - Filter by status (`In`, `Out`).
 
-### Database Schema
-- **Books** ←→ **BookAuthors** ←→ **Authors**  
-- **Books** ←→ **BookCategories** ←→ **Categories**  
-- **Books** ←→ **Publisher**  
-- **BorrowTransactions** ←→ **Members**  
-- **SystemUsers** with Roles  
+- **Member Management**
+  - CRUD operations for library members.
 
-📌 ERD available in `Docs/ERD.png`  
+- **System User Management**
+  - Roles: **Administrator**, **Librarian**, **Staff**.
+  - Secure authentication & authorization with JWT.
+  - Role-based access control on API endpoints.
+
+- **Borrowing System**
+  - Borrow and return operations with due dates.
+  - Track which staff processed the transaction.
+
+- **Activity Logging**
+  - Every action is logged for auditing purposes.
 
 ---
 
-## ⚙️ Installation & Setup
+## 🚀 Technology Stack
 
-### 1. Clone the Repository
-```bash
-git clone https://github.com/your-username/library-management-system.git
-cd library-management-system
+- **.NET 7 / ASP.NET Core Web API**
+- **Entity Framework Core** with SQL Server
+- **JWT Authentication**
+- **Clean Architecture**
+- **Postman Collection** for API testing
+
+---
+
+## 📡 API Endpoints
+
+### Authentication
+- `POST /api/auth/login` – Login and get JWT token.
+- `POST /api/auth/register` – Register a new system user (Admin only).
+
+### Books
+- `GET /api/books` – Get all books.
+- `GET /api/books/{id}` – Get book details.
+- `GET /api/books/search?name=...&author=...&category=...` – Search books.
+- `GET /api/books/status/{status}` – Get books by status.
+- `POST /api/books` – Add new book.
+- `PUT /api/books/{id}` – Update book.
+- `DELETE /api/books/{id}` – Delete book.
+
+### Members
+- `GET /api/members` – Get all members.
+- `POST /api/members` – Add member.
+- `PUT /api/members/{id}` – Update member.
+- `DELETE /api/members/{id}` – Remove member.
+
+### Borrowing
+- `POST /api/borrow` – Borrow a book.
+- `POST /api/return` – Return a book.
+
+---
+
+## 🧪 Testing
+
+- ✅ Postman collection is included for easy API testing.
+- ✅ SQL scripts with sample data are provided in `/docs/sql`.
+
+---
+
+## 📌 Notes
+
+- Passwords are securely hashed before storage.
+- Roles and permissions are enforced using ASP.NET Core Identity.
+- Logs are stored in **ActivityLogs** for auditing.
+
+---
+
+## 🎯 Bonus Features Implemented
+- API to **search books by name, author, or category**.
+- API to **filter books by status**.
+- Comprehensive **Postman collection** included.
+
+---
+
+## 👨‍💻 Author
+
+**Walid** – Backend Developer  
