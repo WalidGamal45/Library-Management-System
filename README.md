@@ -2,6 +2,7 @@
 ---
 
 ## 📊 Database Schema
+[ SQL scripts with sample data](https://drive.google.com/file/d/1LYZkYuL5nXasJe5OMXKZo_3HjFy5doDS/view?usp=drive_link)
 
 The system supports books, members, borrowing transactions, and role-based access control.
 
