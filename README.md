@@ -9,7 +9,7 @@ The system supports books, members, borrowing transactions, and role-based acces
 ![ERD](https://i.suar.me/npOlM/l)
 
 
-[ Postman Collection](https://drive.google.com/file/d/1iEC71giaXNYqydtlyw0v7DLuo53urxSW/view?usp=drive_link)
+[ Postman Collection](https://drive.google.com/file/d/1pV3msGfiQcbCkeJyc9OslneRu8x5cxHH/view?usp=drive_link)
 
 ### Key Entities
 - **Books**: Metadata such as title, authors, publishers, categories, ISBN, edition, summary, cover image, and status (`In`/`Out`).
