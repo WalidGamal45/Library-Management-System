@@ -2,14 +2,14 @@
 ---
 
 ## 📊 Database Schema
-[ SQL scripts with sample data](https://drive.google.com/file/d/1LYZkYuL5nXasJe5OMXKZo_3HjFy5doDS/view?usp=drive_link)
+[ SQL scripts with sample data](https://drive.google.com/file/d/1iEC71giaXNYqydtlyw0v7DLuo53urxSW/view?usp=drive_link)
 
 The system supports books, members, borrowing transactions, and role-based access control.
 
 ![ERD](https://i.suar.me/npOlM/l)
 
 
-[ Postman Collection](https://drive.google.com/file/d/1iEC71giaXNYqydtlyw0v7DLuo53urxSW/view?usp=drive_link)
+[ Postman Collection](https://drive.google.com/file/d/1pV3msGfiQcbCkeJyc9OslneRu8x5cxHH/view?usp=drive_link)
 
 ### Key Entities
 - **Books**: Metadata such as title, authors, publishers, categories, ISBN, edition, summary, cover image, and status (`In`/`Out`).
