@@ -21,6 +21,21 @@ public class BooksController : ControllerBase
         var books = await _bookService.SearchBooks(title, author, category);
         return Ok(books);
     }
+    [HttpGet("get-book-by-status/{id}")]
+    public async Task<IActionResult> GetBookByStatus(int id)
+    {
+        var book = await _bookService.GetByIdAsync(id);
+
+        if (book == null)
+            return NotFound("Book not found");
+
+        return book.Status switch
+        {
+            BookStatus.Available => Ok(book),
+            BookStatus.Borrowed => BadRequest("The book is Borrowed"),
+            BookStatus.Lost => BadRequest("The book is Lost"),
+        };
+    }
 
     [HttpGet]
     public async Task<IActionResult> GetBooks()
