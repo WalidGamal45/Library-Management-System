@@ -1,4 +1,5 @@
 ﻿// Data/LibraryDbContext.cs
+using Domain.Models;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Task___Code_81__.Models;
@@ -16,6 +17,7 @@ public class LibraryDbContext : IdentityDbContext<ApplicationUser>
     public DbSet<Member> Members { get; set; }
     public DbSet<BorrowTransaction> BorrowTransactions { get; set; }
     public DbSet<ActivityLog> ActivityLogs { get; set; }
+    public DbSet<User> Users { get; set; }
 
     protected override void OnModelCreating(ModelBuilder builder)
     {
